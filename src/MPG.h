@@ -69,6 +69,11 @@ class MPG
 		bool hasRightAnalogStick {false};
 
 		/**
+		 * @brief  スティック情報を変換する必要があるかどうか
+		 */
+		bool needsConvertJoystickValue {true};
+
+		/**
 		 * @brief Perform pin setup and any other initialization the board requires. Derived classes must overide this member.
 		 */
 		virtual void setup() = 0;
