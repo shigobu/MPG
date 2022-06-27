@@ -178,10 +178,20 @@ XInputReport *MPG::getXInputReport()
 		| (pressedB4() ? XBOX_MASK_Y    : 0)
 	;
 
-	xinputReport.lx = static_cast<int16_t>(state.lx) + INT16_MIN;
-	xinputReport.ly = static_cast<int16_t>(~state.ly) + INT16_MIN;
-	xinputReport.rx = static_cast<int16_t>(state.rx) + INT16_MIN;
-	xinputReport.ry = static_cast<int16_t>(~state.ry) + INT16_MIN;
+	if (needsConvertJoystickValue)
+	{
+		xinputReport.lx = static_cast<int16_t>(state.lx) + INT16_MIN;
+		xinputReport.ly = static_cast<int16_t>(~state.ly) + INT16_MIN;
+		xinputReport.rx = static_cast<int16_t>(state.rx) + INT16_MIN;
+		xinputReport.ry = static_cast<int16_t>(~state.ry) + INT16_MIN;
+	}
+	else
+	{
+		xinputReport.lx = static_cast<int16_t>(state.lx);
+		xinputReport.ly = static_cast<int16_t>(state.ly);
+		xinputReport.rx = static_cast<int16_t>(state.rx);
+		xinputReport.ry = static_cast<int16_t>(state.ry);
+	}
 
 	if (hasAnalogTriggers)
 	{
